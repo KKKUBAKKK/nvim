@@ -34,19 +34,19 @@ return {
 				-- Bash
 				"bashls",
 				-- Assembly
-				"asm_lsp",
+				-- "asm_lsp",
 				-- Kotlin
 				"kotlin_language_server",
 				-- C/C++
 				"clangd",
 				-- C#
-				"omnisharp",
+				-- "omnisharp",
 				-- CMake
 				"cmake",
 				-- Markdown
 				"marksman",
 				-- XML
-				"lemminx",
+				-- "lemminx",
 				-- Docker
 				"dockerls",
 			},
@@ -63,7 +63,7 @@ return {
 				"shellcheck",
 				"shfmt",
 				-- Assembly
-				"asmfmt",
+				-- "asmfmt",
 				-- Kotlin
 				"kotlin-debug-adapter",
 				"ktlint",
@@ -73,15 +73,15 @@ return {
 				"codelldb",
 				"cpplint",
 				-- C#
-				"ast_grep",
-				"netcoredbg",
+				-- "ast_grep",
+				-- "netcoredbg",
 				-- CMake
 				"cmakelang",
 				-- Markdown
 				"markdownlint",
 				"prettier",
 				-- Docker
-				"hadolint",
+				-- "hadolint",
 			},
 		})
 	end,
