@@ -27,24 +27,61 @@ return {
 		mason_lspconfig.setup({
 			-- list of servers for mason to install
 			ensure_installed = {
-				-- "html",
-				-- "cssls",
+				-- Lua
 				"lua_ls",
+				-- Python
 				"pyright",
-				"bash-language-server",
-				-- "kotlin-language-server",
-				-- "omnisharp",
+				-- Bash
+				"bashls",
+				-- Assembly
+				"asm_lsp",
+				-- Kotlin
+				"kotlin_language_server",
+				-- C/C++
 				"clangd",
+				-- C#
+				"omnisharp",
+				-- CMake
+				"cmake",
+				-- Markdown
+				"marksman",
+				-- XML
+				"lemminx",
+				-- Docker
+				"dockerls",
 			},
 		})
 
 		mason_tool_installer.setup({
 			ensure_installed = {
-				"prettier", -- prettier formatter
-				"stylua", -- lua formatter
-				"isort", -- python formatter
-				"black", -- python formatter
-				"pylint", -- python linter
+				-- Python
+				"debugpy",
+				"ruff",
+				"black",
+				"isort",
+				-- Bash
+				"shellcheck",
+				"shfmt",
+				-- Assembly
+				"asmfmt",
+				-- Kotlin
+				"kotlin-debug-adapter",
+				"ktlint",
+				"detekt",
+				-- C/C++
+				"clang-format",
+				"codelldb",
+				"cpplint",
+				-- C#
+				"ast_grep",
+				"netcoredbg",
+				-- CMake
+				"cmakelang",
+				-- Markdown
+				"markdownlint",
+				"prettier",
+				-- Docker
+				"hadolint",
 			},
 		})
 	end,
