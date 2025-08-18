@@ -28,15 +28,15 @@ return {
 			-- list of servers for mason to install
 			ensure_installed = {
 				-- Lua
-				"lua_ls",
+				-- "lua_ls",
 				-- Python
-				"pyright",
+				-- "pyright",
 				-- Bash
-				"bashls",
+				-- "bashls",
 				-- Assembly
 				-- "asm_lsp",
 				-- Kotlin
-				"kotlin_language_server",
+				-- "kotlin_language_server",
 				-- C/C++
 				"clangd",
 				-- C#
@@ -44,42 +44,42 @@ return {
 				-- CMake
 				"cmake",
 				-- Markdown
-				"marksman",
+				-- "marksman",
 				-- XML
 				-- "lemminx",
 				-- Docker
-				"dockerls",
+				-- "dockerls",
 			},
 		})
 
 		mason_tool_installer.setup({
 			ensure_installed = {
 				-- Python
-				"debugpy",
-				"ruff",
-				"black",
-				"isort",
+				-- "debugpy",
+				-- "ruff",
+				-- "black",
+				-- "isort",
 				-- Bash
-				"shellcheck",
-				"shfmt",
+				-- "shellcheck",
+				-- "shfmt",
 				-- Assembly
 				-- "asmfmt",
 				-- Kotlin
-				"kotlin-debug-adapter",
-				"ktlint",
-				"detekt",
+				-- "kotlin-debug-adapter",
+				-- "ktlint",
+				-- "detekt",
 				-- C/C++
-				"clang-format",
+				-- "clang-format",
 				"codelldb",
-				"cpplint",
+				-- "cpplint",
 				-- C#
 				-- "ast_grep",
 				-- "netcoredbg",
 				-- CMake
-				"cmakelang",
+				-- "cmakelang",
 				-- Markdown
-				"markdownlint",
-				"prettier",
+				-- "markdownlint",
+				-- "prettier",
 				-- Docker
 				-- "hadolint",
 			},
