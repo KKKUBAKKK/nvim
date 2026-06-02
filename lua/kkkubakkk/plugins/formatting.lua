@@ -7,38 +7,39 @@ return {
 		conform.setup({
 			-- Define formatters for each filetype
 			formatters_by_ft = {
-				-- C/C++
-				-- c = { "clangformat" },
-				-- cpp = { "clangformat" },
+				-- C/C++/CUDA (uses .clang-format in your project if present)
+				c = { "clang_format" },
+				cpp = { "clang_format" },
+				cuda = { "clang_format" },
+				-- Lua (this config)
+				lua = { "stylua" },
 				-- C#
-				-- cs = { "omnisharp" }, -- Assuming OmniSharp provides formatting, or use a specific C# formatter like `dotnet format` if integrated
+				-- cs = { "csharpier" },
 				-- Java
-				-- java = { "google_java_format" }, -- Or 'prettierd' if you have a Java Prettier plugin
+				-- java = { "google_java_format" },
 				-- Kotlin
 				-- kotlin = { "ktlint" },
-				-- Python (already good, but keeping it for completeness)
+				-- Python
 				-- python = { "isort", "black" },
 				-- Bash
 				-- sh = { "shfmt" },
-				-- Lua (keeping it as a common Neovim config language)
-				-- lua = { "stylua" },
-				-- General purpose formatters for config files, etc.
-				-- json = { "prettier" }, -- Prettier can still be useful for JSON files
-				-- yaml = { "prettier" }, -- Prettier can still be useful for YAML files
-				-- markdown = { "prettier" }, -- Prettier can still be useful for Markdown
+				-- Config files
+				-- json = { "prettier" },
+				-- yaml = { "prettier" },
+				-- markdown = { "prettier" },
 			},
-			-- Configure format-after-save behavior
-			format_after_save = {
-				lsp_fallback = true, -- Allow LSP formatters to be used if Conform doesn't have one
-				async = true, -- Format asynchronously to avoid blocking Neovim
-				timeout_ms = 2000, -- Increase timeout for potentially longer formatting processes
+			-- Format on save (synchronous so the buffer is formatted before write).
+			-- lsp_format = "fallback" replaces the deprecated lsp_fallback = true.
+			format_on_save = {
+				lsp_format = "fallback",
+				timeout_ms = 2000,
 			},
 		})
 
 		-- Keymap for manual formatting (can be used in normal or visual mode)
 		vim.keymap.set({ "n", "v" }, "<leader>mp", function()
 			conform.format({
-				lsp_fallback = true,
+				lsp_format = "fallback",
 				async = false,
 				timeout_ms = 2000,
 			})

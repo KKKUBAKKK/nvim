@@ -27,8 +27,8 @@ return {
 		mason_lspconfig.setup({
 			-- list of servers for mason to install
 			ensure_installed = {
-				-- Lua
-				-- "lua_ls",
+				-- Lua (used by lazydev when editing this config)
+				"lua_ls",
 				-- Python
 				-- "pyright",
 				-- Bash
@@ -54,6 +54,10 @@ return {
 
 		mason_tool_installer.setup({
 			ensure_installed = {
+				-- C/C++
+				"clang-format", -- formatter (used by conform)
+				-- Lua
+				"stylua",       -- formatter (used by conform)
 				-- Python
 				-- "debugpy",
 				-- "ruff",
@@ -68,9 +72,8 @@ return {
 				-- "kotlin-debug-adapter",
 				-- "ktlint",
 				-- "detekt",
-				-- C/C++
-				-- "clang-format",
-				"codelldb",
+				-- C/C++ debug adapter (cppdbg) is installed by mason-nvim-dap (see dap.lua).
+				-- "codelldb", -- alternative LLDB-based adapter, not used (we standardise on cppdbg)
 				-- "cpplint",
 				-- C#
 				-- "ast_grep",

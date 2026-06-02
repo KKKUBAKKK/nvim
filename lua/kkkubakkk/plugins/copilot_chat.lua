@@ -1,9 +1,12 @@
 return {
     {
         "CopilotC-Nvim/CopilotChat.nvim",
-        vim.keymap.set('n', '<leader>cc', ':CopilotChatToggle<CR>', { desc = 'Toggle Copilot Chat' }),
         dependencies = { { "nvim-lua/plenary.nvim", branch = "master" }, },
         build = "make tiktoken",
+        cmd = { "CopilotChat", "CopilotChatToggle" },
+        keys = {
+            { "<leader>cc", "<cmd>CopilotChatToggle<cr>", desc = "Toggle Copilot Chat" },
+        },
         opts = {
             model = 'gpt-4.1',       -- AI model to use
             temperature = 0.1,       -- Lower = focused, higher = creative

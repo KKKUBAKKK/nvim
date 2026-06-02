@@ -4,15 +4,8 @@ return {
     dependencies = {
         "hrsh7th/cmp-nvim-lsp",
         { "antosha417/nvim-lsp-file-operations", config = true },
-        { "folke/neodev.nvim",                   opts = {} },
     },
     config = function()
-        -- import lspconfig plugin
-        local lspconfig = require("lspconfig")
-
-        -- import mason_lspconfig plugin
-        local mason_lspconfig = require("mason-lspconfig")
-
         -- import cmp-nvim-lsp plugin
         local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
@@ -54,10 +47,14 @@ return {
                 keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
 
                 opts.desc = "Go to previous diagnostic"
-                keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
+                keymap.set("n", "[d", function()
+                    vim.diagnostic.jump({ count = -1, float = true })
+                end, opts) -- jump to previous diagnostic (vim.diagnostic.goto_prev was deprecated in 0.11)
 
                 opts.desc = "Go to next diagnostic"
-                keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
+                keymap.set("n", "]d", function()
+                    vim.diagnostic.jump({ count = 1, float = true })
+                end, opts) -- jump to next diagnostic (vim.diagnostic.goto_next was deprecated in 0.11)
 
                 opts.desc = "Show documentation for what is under cursor"
                 keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
@@ -67,41 +64,65 @@ return {
             end,
         })
 
-        -- used to enable autocompletion (assign to every lsp server config)
+        -- nvim-cmp capabilities, applied to every server below.
         local capabilities = cmp_nvim_lsp.default_capabilities()
 
-        -- Change the Diagnostic symbols in the sign column (gutter)
-        -- (not in youtube nvim video)
-        -- local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-        -- for type, icon in pairs(signs) do
-        --   local hl = "DiagnosticSign" .. type
-        --   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-        -- end
+        -- Diagnostic UI: gutter signs + inline virtual text (Neovim 0.11 API).
+        vim.diagnostic.config({
+            virtual_text = true,
+            severity_sort = true,
+            signs = {
+                text = {
+                    [vim.diagnostic.severity.ERROR] = "E",
+                    [vim.diagnostic.severity.WARN] = "W",
+                    [vim.diagnostic.severity.HINT] = "H",
+                    [vim.diagnostic.severity.INFO] = "I",
+                },
+            },
+        })
 
-        -- mason_lspconfig.setup_handlers({
-        -- default handler for installed servers
-        -- function(server_name)
-        -- lspconfig[server_name].setup({
-        -- capabilities = capabilities,
-        -- })
-        -- end,
-        -- ["lua_ls"] = function()
-        -- configure lua server (with special settings)
-        -- lspconfig["lua_ls"].setup({
-        -- capabilities = capabilities,
-        -- settings = {
-        -- Lua = {
-        -- make the language server recognize "vim" global
-        -- diagnostics = {
-        -- globals = { "vim" },
-        -- },
-        -- completion = {
-        -- callSnippet = "Replace",
-        -- },
-        -- },
-        -- },
-        -- })
-        -- end,
-        -- })
+        -- Neovim 0.11 native LSP: broadcast nvim-cmp capabilities to every server.
+        -- mason-lspconfig v2 auto-enables installed servers (vim.lsp.enable), so we
+        -- no longer call lspconfig[server].setup() or setup_handlers (removed in v2).
+        vim.lsp.config("*", {
+            capabilities = capabilities,
+        })
+
+        -- clangd, tuned for C/C++/CUDA development.
+        vim.lsp.config("clangd", {
+            cmd = {
+                "clangd",
+                "--background-index",
+                "--clang-tidy",
+                "--header-insertion=iwyu",
+                "--completion-style=detailed",
+                "--function-arg-placeholders",
+                "--fallback-style=llvm",
+                -- Let clangd understand nvcc and host compilers so it can parse
+                -- CUDA (.cu/.cuh) and cross-compiled translation units. Adjust the
+                -- paths to match your toolchain if needed.
+                "--query-driver=/usr/bin/nvcc,/usr/local/cuda*/bin/nvcc,/usr/bin/g++,/usr/bin/clang++",
+            },
+            init_options = {
+                usePlaceholders = true,
+                completeUnimported = true,
+                clangdFileStatus = true,
+            },
+            -- Pin offset encoding to avoid clangd's "multiple offset encodings" warning.
+            capabilities = vim.tbl_deep_extend("force", capabilities, {
+                offsetEncoding = { "utf-16" },
+            }),
+        })
+
+        -- lua_ls: recognise the `vim` global when editing this config.
+        -- (lazydev.nvim supplies the Neovim runtime library types.)
+        vim.lsp.config("lua_ls", {
+            settings = {
+                Lua = {
+                    diagnostics = { globals = { "vim" } },
+                    completion = { callSnippet = "Replace" },
+                },
+            },
+        })
     end,
 }
