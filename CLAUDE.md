@@ -6,6 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a personal Neovim configuration written in Lua, managed by the [lazy.nvim](https://github.com/folke/lazy.nvim) plugin manager. It targets **Neovim 0.11+** (uses the native `vim.lsp.config`/`vim.lsp.enable` API and `vim.diagnostic.jump`, both of which replaced APIs deprecated in 0.11) and is tuned primarily for **C/C++/CUDA development** (clangd, CMake, cppdbg).
 
+## User documentation
+
+Human-facing guides live in `docs/` (start at `docs/README.md`): thematic guides for essentials, files/search, editing, LSP, git, debugging, C++/CMake, and AI tools, plus a full keybinding cheatsheet (`docs/09-cheatsheet.md`). Keep these in sync when you change keymaps or add plugins.
+
 ## Architecture
 
 Entry point is `init.lua`, which loads two things in order:
