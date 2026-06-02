@@ -1,0 +1,29 @@
+# Vim/Neovim swap, backup & undo files
+*.swp
+*.swo
+*.swn
+*~
+.*.un~
+[._]*.s[a-v][a-z]
+
+# Persisted netrw history
+.netrwhist
+
+# Editor-generated tags
+tags
+tags.lock
+.tags
+
+# Project-local Lua LS config (often machine-specific)
+.luarc.json
+
+# Logs
+*.log
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Local, machine-specific Claude Code overrides (the rest of .claude/ may be
+# ignored globally; keep local settings out of the repo regardless)
+.claude/settings.local.json
