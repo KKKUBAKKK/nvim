@@ -19,11 +19,11 @@ return {
       -- Kotlin
       -- kotlin = { "ktlint" }, -- ktlint can act as both linter and formatter
 
-      -- Python (already good, keeping for completeness)
-      -- python = { "pylint" },
+      -- Python (ruff = fast linter; pyright handles type-checking via the LSP)
+      python = { "ruff" },
 
-      -- Bash
-      -- sh = { "shellcheck" },
+      -- Bash: diagnostics come from bash-language-server, which runs shellcheck
+      -- automatically when it's installed, so no separate nvim-lint entry is needed.
 
       -- Markdown (useful for documentation in any project)
       -- markdown = { "markdownlint" },

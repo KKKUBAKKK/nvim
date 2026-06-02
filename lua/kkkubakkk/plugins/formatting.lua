@@ -19,10 +19,10 @@ return {
 				-- java = { "google_java_format" },
 				-- Kotlin
 				-- kotlin = { "ktlint" },
-				-- Python
-				-- python = { "isort", "black" },
+				-- Python (ruff sorts imports + formats; replaces isort + black)
+				python = { "ruff_organize_imports", "ruff_format" },
 				-- Bash
-				-- sh = { "shfmt" },
+				sh = { "shfmt" },
 				-- Config files
 				-- json = { "prettier" },
 				-- yaml = { "prettier" },

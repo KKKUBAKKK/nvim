@@ -25,14 +25,23 @@ return {
 		})
 
 		mason_lspconfig.setup({
+			-- Recent nvim-lspconfig ships a `stylua` config (cmd `stylua --lsp`).
+			-- mason-lspconfig v2 auto-enables every mason-installed server that has
+			-- an lspconfig config, so it tries to start stylua as a language server.
+			-- The mason build of stylua has no `--lsp` mode and exits immediately
+			-- ("Client stylua quit with exit code 2"). stylua is a formatter only
+			-- (used by conform in formatting.lua), so exclude it from auto-enable.
+			automatic_enable = {
+				exclude = { "stylua" },
+			},
 			-- list of servers for mason to install
 			ensure_installed = {
 				-- Lua (used by lazydev when editing this config)
 				"lua_ls",
 				-- Python
-				-- "pyright",
+				"pyright",
 				-- Bash
-				-- "bashls",
+				"bashls",
 				-- Assembly
 				-- "asm_lsp",
 				-- Kotlin
@@ -59,13 +68,11 @@ return {
 				-- Lua
 				"stylua",       -- formatter (used by conform)
 				-- Python
+				"ruff",         -- linter + formatter (used by conform & nvim-lint; replaces black/isort)
 				-- "debugpy",
-				-- "ruff",
-				-- "black",
-				-- "isort",
 				-- Bash
-				-- "shellcheck",
-				-- "shfmt",
+				"shellcheck",   -- linter (bash-language-server uses it for diagnostics)
+				"shfmt",        -- formatter (used by conform)
 				-- Assembly
 				-- "asmfmt",
 				-- Kotlin
