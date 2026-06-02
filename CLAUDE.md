@@ -35,13 +35,28 @@ Capabilities from `cmp-nvim-lsp` are broadcast to all servers via `vim.lsp.confi
 - `plugins/cmake-tools.lua` — cmake-tools.nvim drives configure/build/run/debug. Builds into `build/`, exports `compile_commands.json` and soft-links it to the project root so clangd indexes correctly. Keymaps under **`<leader>C`** (capital C, to avoid clashing with `<leader>c` Copilot mappings).
 - `plugins/dap.lua` — nvim-dap + dap-ui + virtual text. Uses the **`cppdbg`** adapter (`OpenDebugAD7`, installed via mason-nvim-dap), shared by `cmake-tools`. Keymaps under `<leader>d`. The DAP UI auto-opens/closes via `dap.listeners`.
 
+### AI / Claude Code integration
+
+- `plugins/claudecode.lua` — `coder/claudecode.nvim` (dep: `snacks.nvim`). Connects Neovim to the Claude Code CLI over its MCP socket. Send selections (`<leader>as` in visual), add the current buffer (`<leader>ab`) or a tree file (`<leader>as` in nvim-tree), toggle/focus the CLI (`<leader>ac`/`<leader>af`), and review Claude's proposed edits in a native diff (accept `<leader>aa`, deny `<leader>ad`). Requires the `claude` CLI on PATH.
+- `core/options.lua` sets `autoread` + a `checktime` autocmd (group `AutoReadOnExternalChange`) so buffers reload when the Claude Code CLI edits files on disk.
+- Copilot context: `plugins/copilot_chat.lua` adds `<leader>cb` (whole buffer as context) and `<leader>cv` (visual selection); CopilotChat also supports in-prompt sticky context like `#file:path` and `#buffers`.
+
+### Reviewing changes
+
+- `plugins/diffview.lua` — `sindrets/diffview.nvim` for full-file/multi-file diff review (your edits or Claude's): `<leader>gd` working-tree changes, `<leader>gh` current-file history, `<leader>gH` repo history, `<leader>gq` close. Per-hunk staging and inline blame remain in `plugins/gitsigns.lua` under `<leader>h`.
+
 ## Keymap conventions
 
-Leader is space. Namespaces are intentional, watch for collisions when adding mappings:
+Leader is space. Namespaces are intentional, watch for collisions when adding mappings (which-key shows group labels for these, configured in `plugins/which-key.lua`):
 
+- `<leader>a…` — AI / Claude Code (claudecode.nvim)
 - `<leader>C…` — CMake (capital C)
-- `<leader>c…` — Copilot
+- `<leader>c…` — Copilot (incl. CopilotChat: `cc` toggle, `cb` buffer context, `cv` selection context)
 - `<leader>d…` — DAP debugging
+- `<leader>e…` — file explorer (nvim-tree)
+- `<leader>f…` — find / Telescope (`fg` = live-grep with ripgrep glob args)
+- `<leader>g…` — Git diff (Diffview)
+- `<leader>h…` — Git hunks / blame (Gitsigns)
 - `<leader>s…` — window splits
 - `<leader>t…` — tabs
 - `<leader>r…` — rename / restart LSP

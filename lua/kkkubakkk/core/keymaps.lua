@@ -5,8 +5,6 @@ local keymap = vim.keymap
 
 ------------------- General Keymaps -------------------
 
--- keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode" })
-
 keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
 
 -- increment/decrement numbers

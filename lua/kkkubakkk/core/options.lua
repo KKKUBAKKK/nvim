@@ -41,3 +41,24 @@ opt.splitbelow = true -- split horizontal window to the bottom
 
 -- swapfile
 opt.swapfile = true
+
+-- auto-reload files changed outside Neovim (e.g. edits made by the Claude Code
+-- CLI on disk). autoread alone only re-reads on certain triggers, so we also
+-- run :checktime when regaining focus or the cursor goes idle.
+opt.autoread = true
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
+    group = vim.api.nvim_create_augroup("AutoReadOnExternalChange", { clear = true }),
+    callback = function()
+        -- Don't clobber the command line while typing a command.
+        if vim.fn.mode() ~= "c" and vim.fn.getcmdwintype() == "" then
+            vim.cmd("checktime")
+        end
+    end,
+})
+-- Notify when a buffer was reloaded from a changed file on disk.
+vim.api.nvim_create_autocmd("FileChangedShellPost", {
+    group = "AutoReadOnExternalChange",
+    callback = function()
+        vim.notify("File changed on disk, buffer reloaded", vim.log.levels.WARN)
+    end,
+})

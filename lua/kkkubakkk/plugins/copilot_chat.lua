@@ -6,6 +6,30 @@ return {
         cmd = { "CopilotChat", "CopilotChatToggle" },
         keys = {
             { "<leader>cc", "<cmd>CopilotChatToggle<cr>", desc = "Toggle Copilot Chat" },
+            -- Open chat with the whole current buffer as context.
+            {
+                "<leader>cb",
+                function()
+                    require("CopilotChat").open({
+                        selection = require("CopilotChat.select").buffer,
+                    })
+                end,
+                desc = "Copilot Chat: current buffer as context",
+            },
+            -- Open chat with the visual selection as context.
+            {
+                "<leader>cv",
+                function()
+                    require("CopilotChat").open({
+                        selection = require("CopilotChat.select").visual,
+                    })
+                end,
+                mode = "v",
+                desc = "Copilot Chat: selection as context",
+            },
+            -- Tip: inside the chat prompt you can also pull in specific files with
+            -- sticky context tokens, e.g. `#file:src/main.cu` or `#buffers` for all
+            -- open buffers. These persist across messages in the same session.
         },
         opts = {
             model = 'gpt-4.1',       -- AI model to use
