@@ -18,8 +18,10 @@ If you forget a binding, press `<Space>` and **wait ~0.5s** — [which-key](http
 | `<leader>f` | Find (Telescope) |
 | `<leader>g` | Git diff (Diffview) |
 | `<leader>h` | Git hunks (Gitsigns) |
+| `<leader>r` | Rename / restart LSP / search & replace |
 | `<leader>s` | Splits |
 | `<leader>t` | Tabs |
+| `<leader>u` | UI Toggle (theme) |
 | `<leader>x` | Diagnostics list (Trouble) |
 | `<leader>w` | Workspace sessions |
 
@@ -73,6 +75,18 @@ This config shows **tabs** in the top bar (via bufferline). Manage them with:
 | `<leader>tn` | Go to next tab |
 | `<leader>tp` | Go to previous tab |
 | `<leader>tf` | Open current file in its own new tab |
+
+## Themes (`core/theme.lua`)
+
+Eight predefined colorschemes — gruvbox, tokyonight, catppuccin, kanagawa, rose-pine, everforest, nightfox, melange — each with a matching dark and light variant. Only gruvbox loads eagerly at startup; the rest are loaded on demand the first time you switch to them.
+
+| Key | Action |
+|-----|--------|
+| `<leader>ub` | Toggle **b**ackground (light/dark) for the current theme |
+| `<leader>ut` | Open a picker to jump straight to a **t**heme |
+| `<leader>uc` | **C**ycle to the next theme (keeps the current background) |
+
+Whatever theme + background you land on is remembered (written to a state file under `stdpath("state")`) and restored automatically the next time you open Neovim.
 
 ## tmux integration
 

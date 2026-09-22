@@ -28,6 +28,14 @@ Leader = `<Space>`. Forgot one? Press `<leader>` and wait for the which-key popu
 |-----|--------|
 | `<leader>ws` / `<leader>wr` | Save / restore session for cwd |
 
+## Themes
+
+| Key | Action |
+|-----|--------|
+| `<leader>ub` | Toggle light/dark background for the current theme |
+| `<leader>ut` | Pick a theme (gruvbox, tokyonight, catppuccin, kanagawa, rose-pine, everforest, nightfox, melange) |
+| `<leader>uc` | Cycle to the next theme |
+
 ## File explorer (nvim-tree)
 
 | Key | Action |
@@ -48,7 +56,21 @@ Leader = `<Space>`. Forgot one? Press `<leader>` and wait for the which-key popu
 | `<leader>ft` | Find TODOs |
 | *(in picker)* `<C-j>/<C-k>` | Next / prev result |
 | *(in picker)* `<C-q>` | Send results to quickfix |
+| *(in picker)* `<C-t>` | Send results into Trouble (browsable, file-grouped, no re-search) |
 | *(in picker)* `<C-v>/<C-x>` | Open in vertical / horizontal split |
+
+## Search & replace (grug-far)
+
+| Key | Action |
+|-----|--------|
+| `<leader>rr` | Open search & replace (project-wide) |
+| `<leader>rw` | Open, pre-filled with word under cursor |
+| `<leader>rf` | Open, scoped to current file |
+| `<leader>rr` (visual) | Open, pre-filled with selection |
+| *(in buffer)* `\l` / `\n` / `\p` | Sync current occurrence / then next / then prev |
+| *(in buffer)* `\v` | Sync whole current file |
+| *(in buffer)* `\s` | Sync everywhere (whole codebase) |
+| *(in buffer)* `\c` | Close |
 
 ## Editing
 
@@ -64,6 +86,8 @@ Leader = `<Space>`. Forgot one? Press `<leader>` and wait for the which-key popu
 | `s` (visual) | Substitute selection |
 | `<C-space>` / `<BS>` | Treesitter: expand / shrink selection |
 | `]t` / `[t` | Next / previous TODO comment |
+| `<leader>us` | Toggle sticky scroll context (treesitter-context) |
+| `<leader>uj` | Jump up to the pinned sticky context line |
 
 ## Completion menu (nvim-cmp, insert)
 
@@ -80,8 +104,10 @@ Leader = `<Space>`. Forgot one? Press `<leader>` and wait for the which-key popu
 | Key | Action |
 |-----|--------|
 | `gd` / `gD` | Go to definition / declaration |
-| `gR` | References |
-| `gi` / `gt` | Implementations / type definitions |
+| `gR` | References (Trouble — stays open to browse) |
+| `gi` / `gt` | Implementations (Trouble) / type definitions |
+| `gpd` / `gpi` / `gpt` | Peek definition / implementation / type in a float, no jump |
+| `gpc` | Close peek preview floats |
 | `K` | Hover docs |
 | `<leader>ca` | Code action |
 | `<leader>rn` | Rename symbol |

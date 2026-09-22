@@ -20,3 +20,6 @@ require("lazy").setup({ { import = "kkkubakkk.plugins" }, { import = "kkkubakkk.
         notify = false,
     },
 })
+
+-- Restore whichever theme/background was last selected (core/theme.lua).
+require("kkkubakkk.core.theme").apply_saved()

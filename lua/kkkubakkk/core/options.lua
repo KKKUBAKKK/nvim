@@ -26,7 +26,7 @@ opt.cursorline = true -- highlight the current cursor line
 
 -- turn on termguicolors for nightfly colorscheme to work
 opt.termguicolors = true
-opt.background = "dark" -- colorschemes that can be light or dark will be made dark
+opt.background = "dark" -- fallback until core/theme.lua restores the last-used theme/background
 opt.signcolumn = "yes"  -- show sign column so that text doesn't shift
 
 -- backspace
@@ -41,6 +41,10 @@ opt.splitbelow = true -- split horizontal window to the bottom
 
 -- swapfile
 opt.swapfile = true
+
+-- sessions (auto-session): include localoptions so filetype/highlighting
+-- are restored correctly, as recommended by :checkhealth auto-session
+opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 -- auto-reload files changed outside Neovim (e.g. edits made by the Claude Code
 -- CLI on disk). autoread alone only re-reads on certain triggers, so we also

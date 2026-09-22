@@ -23,6 +23,13 @@ return {
             ["<C-k>"] = actions.move_selection_previous, -- move to prev result
             ["<C-j>"] = actions.move_selection_next, -- move to next result
             ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+            -- Send all results into Trouble instead: a persistent, file-grouped
+            -- list you can walk through with preview, without re-running the
+            -- search or losing your place (unlike picking one result at a time).
+            ["<C-t>"] = function(...)
+              require("lazy").load({ plugins = { "trouble.nvim" } })
+              return require("trouble.sources.telescope").open(...)
+            end,
           },
         },
       },

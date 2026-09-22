@@ -19,8 +19,12 @@ return {
                 local opts = { buffer = ev.buf, silent = true }
 
                 -- set keybinds
+                -- References/implementations use Trouble instead of Telescope: the
+                -- list stays open in a sidebar as you jump between entries (a single
+                -- result still jumps straight there), rather than closing after you
+                -- pick one like a Telescope picker does.
                 opts.desc = "Show LSP references"
-                keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
+                keymap.set("n", "gR", "<cmd>Trouble lsp_references toggle<CR>", opts) -- show usages, stays open to browse
 
                 opts.desc = "Go to declaration"
                 keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
@@ -29,7 +33,7 @@ return {
                 keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts) -- show lsp definitions
 
                 opts.desc = "Show LSP implementations"
-                keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts) -- show lsp implementations
+                keymap.set("n", "gi", "<cmd>Trouble lsp_implementations toggle<CR>", opts) -- show implementations, stays open to browse
 
                 opts.desc = "Show LSP type definitions"
                 keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts) -- show lsp type definitions

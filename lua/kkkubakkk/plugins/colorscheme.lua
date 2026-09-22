@@ -1,7 +1,10 @@
--- Gruvbox: warm, retro, low-blue colorscheme.
--- Tweak `contrast` to "hard" for a darker background or "soft" for a lighter
--- one. `background` is set to dark in core/options.lua; flip it to "light" there
--- (or with `:set background=light`) to use Gruvbox's light variant.
+-- Predefined colorscheme presets. Only gruvbox loads eagerly (as a safe
+-- default); the others are lazy and get loaded on demand by the theme
+-- manager (`core/theme.lua`) when selected via <leader>ut/<leader>uc, or
+-- when restoring the last-used theme at startup.
+--
+-- Switching themes/backgrounds is NOT done here — see core/theme.lua and
+-- the <leader>ub/<leader>ut/<leader>uc keymaps in core/keymaps.lua.
 return {
   {
     "ellisonleao/gruvbox.nvim",
@@ -17,8 +20,43 @@ return {
         },
         transparent_mode = false,
       })
-      vim.o.background = "dark"
-      vim.cmd([[colorscheme gruvbox]])
     end,
+  },
+  {
+    "folke/tokyonight.nvim",
+    lazy = true,
+    opts = {},
+  },
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    lazy = true,
+    opts = {},
+  },
+  {
+    "rebelot/kanagawa.nvim",
+    lazy = true,
+    opts = {},
+  },
+  {
+    "rose-pine/neovim",
+    name = "rose-pine",
+    lazy = true,
+    opts = {},
+  },
+  {
+    "sainnhe/everforest",
+    name = "everforest",
+    lazy = true,
+  },
+  {
+    "EdenEast/nightfox.nvim",
+    lazy = true,
+    opts = {},
+  },
+  {
+    "savq/melange-nvim",
+    name = "melange",
+    lazy = true,
   },
 }

@@ -59,6 +59,13 @@ Brackets/quotes auto-close as you type, and it cooperates with completion (accep
 
 Great for "select this whole expression / block / function" without counting lines.
 
+**Sticky scroll context** — [nvim-treesitter-context](https://github.com/nvim-treesitter/nvim-treesitter-context) pins the enclosing class/function/block signature(s) to the top of the window as you scroll through their body, so you never lose track of what you're inside of.
+
+| Key | Action |
+|-----|--------|
+| `<leader>us` | Toggle sticky scroll context on/off |
+| `<leader>uj` | Jump the cursor up to the pinned context line |
+
 ## Autocompletion — nvim-cmp
 
 The popup completion menu (LSP, snippets, buffer words, file paths). It appears as you type in insert mode.

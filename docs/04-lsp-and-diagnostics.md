@@ -14,15 +14,23 @@ The LSP keymaps below are set **when a server attaches to a buffer** (so they on
 |-----|--------|
 | `gd` | Go to definition (via Telescope, so multiple defs are listed) |
 | `gD` | Go to declaration |
-| `gR` | Show references (Telescope) |
-| `gi` | Go to implementations |
+| `gR` | Show references (Trouble — stays open so you can browse every usage) |
+| `gi` | Go to implementations (Trouble — stays open so you can browse each one) |
 | `gt` | Go to type definition |
 | `K` | **Hover** — show docs/signature for the symbol under the cursor |
+| `gpd` | **Peek** definition in a small float, cursor stays put |
+| `gpi` | Peek implementation in a small float |
+| `gpt` | Peek type definition in a small float |
+| `gpc` | Close all peek preview floats |
 | `<leader>ca` | **Code action** (quick-fixes, refactors). Works on a visual selection too |
 | `<leader>rn` | **Rename** the symbol everywhere (project-wide) |
 | `<leader>rs` | **R**e**s**tart the language server (if it gets stuck) |
 
-> `gd`/`gR`/etc. open in Telescope — use `<C-j>/<C-k>` to move and `<CR>` to jump.
+> `gd`/`gt` open in Telescope — use `<C-j>/<C-k>` to move and `<CR>` to jump. `gR`/`gi` open in Trouble instead (see below) since references/implementations are usually the case where you want to walk through several results without re-searching.
+
+### Peek without jumping — goto-preview
+
+`gpd`/`gpi`/`gpt` (above) open the target in a floating window without moving your cursor or changing buffers — handy for a quick look mid-edit. Close the float with `q`, `<Esc>`, or `gpc`.
 
 ## Diagnostics (errors & warnings)
 
@@ -49,7 +57,7 @@ Diagnostics show as gutter signs (`E` `W` `H` `I`) and inline virtual text.
 | `<leader>xl` | **L**ocation list |
 | `<leader>xt` | **T**ODO comments |
 
-Inside the panel: `<CR>` to jump, `q` to close.
+Inside the panel: `<CR>` to jump, `q` to close. `gR` and `gi` above also open into Trouble. You can also send any Telescope search results into Trouble with `<C-t>` — see [02-files-and-search.md](02-files-and-search.md).
 
 ## Formatting — conform.nvim
 
