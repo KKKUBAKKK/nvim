@@ -27,3 +27,5 @@ Thumbs.db
 # Local, machine-specific Claude Code overrides (the rest of .claude/ may be
 # ignored globally; keep local settings out of the repo regardless)
 .claude/settings.local.json
+
+lazy-lock.json
