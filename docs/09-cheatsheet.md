@@ -133,6 +133,13 @@ Leader = `<Space>`. Forgot one? Press `<leader>` and wait for the which-key popu
 | `<leader>l` | Lint current file |
 | *(on save)* | Auto-format |
 
+## Markdown (in `.md` buffers)
+
+| Key | Action |
+|-----|--------|
+| `<leader>mr` | Toggle rendered / raw view in the terminal, per buffer; files open raw (render-markdown — works over SSH) |
+| `<leader>mb` | Toggle live preview in the browser; notifies started / stopped (markdown-preview — over SSH: forward port 8890, open printed URL) |
+
 ## Git — Gitsigns
 
 | Key | Action |

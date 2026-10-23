@@ -93,3 +93,17 @@ Special comments like `TODO:`, `FIXME:`, `HACK:`, `NOTE:`, `WARN:`, `PERF:` are 
 | `[t` | Jump to previous TODO comment |
 | `<leader>ft` | List all TODOs in Telescope |
 | `<leader>xt` | List all TODOs in the Trouble panel (see [04](04-lsp-and-diagnostics.md)) |
+
+## Markdown viewing — render-markdown & markdown-preview
+
+Two ways to view a `.md` file rendered instead of as raw text (like VSCode's preview toggle). Files always open in raw (code) view; both keys only exist in markdown buffers.
+
+| Key | Action |
+|-----|--------|
+| `<leader>mr` | **R**ender in the terminal — toggle between rendered and raw view |
+| `<leader>mb` | Live preview in the **b**rowser — toggle |
+
+- **`<leader>mr`** ([render-markdown.nvim](https://github.com/MeanderingProgrammer/render-markdown.nvim)) draws headings, code blocks, tables, checkboxes and callouts right in the buffer. The line under the cursor shows raw text, so you can edit while rendered. The toggle is per buffer — rendering one file doesn't render the others. It's pure terminal drawing, so it **works the same over SSH**. Icons need a Nerd Font in your (host) terminal.
+- **`<leader>mb`** ([markdown-preview.nvim](https://github.com/iamcco/markdown-preview.nvim)) opens a live-updating page in your browser, with Mermaid diagrams and math. Locally it just opens your browser. A notification tells you whether the toggle **started** or **stopped** the preview (stopping shuts down the preview server, and the browser tab stops updating).
+
+> **Browser preview over SSH:** the remote has no browser, so the config only prints the preview URL (check `:messages` if it disappears). The port is fixed at `8890`. Connect with `ssh -L 8890:localhost:8890 user@remote` (or add `LocalForward 8890 localhost:8890` to `~/.ssh/config`), then open the printed `http://localhost:8890/...` URL in your host browser.

@@ -15,6 +15,7 @@ return {
       { "<leader>f", group = "Find (Telescope)" },
       { "<leader>g", group = "Git diff (Diffview)" },
       { "<leader>h", group = "Git hunks (Gitsigns)" },
+      { "<leader>m", group = "Format / Markdown" },
       { "<leader>r", group = "Rename / Restart LSP / Replace" },
       { "<leader>s", group = "Splits" },
       { "<leader>t", group = "Tabs" },

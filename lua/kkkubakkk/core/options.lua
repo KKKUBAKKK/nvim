@@ -28,6 +28,7 @@ opt.cursorline = true -- highlight the current cursor line
 opt.termguicolors = true
 opt.background = "dark" -- fallback until core/theme.lua restores the last-used theme/background
 opt.signcolumn = "yes"  -- show sign column so that text doesn't shift
+opt.cmdheight = 0       -- no empty command-line row under the statusline; it appears on ':' and for messages
 
 -- backspace
 opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position

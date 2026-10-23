@@ -58,6 +58,7 @@ Leader is space. Namespaces are intentional, watch for collisions when adding ma
 - `<leader>c…` — Copilot (incl. CopilotChat: `cc` toggle, `cb` buffer context, `cv` selection context)
 - `<leader>d…` — DAP debugging
 - `<leader>e…` — file explorer (nvim-tree)
+- `<leader>m…` — format (`mp`) / markdown view (`mr` terminal render, `mb` browser preview)
 - `<leader>f…` — find / Telescope (`fg` = live-grep with ripgrep glob args)
 - `<leader>g…` — Git diff (Diffview)
 - `<leader>h…` — Git hunks / blame (Gitsigns)

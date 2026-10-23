@@ -10,7 +10,7 @@ Personal Neovim setup, Lua + [lazy.nvim](https://github.com/folke/lazy.nvim), tu
 |------|--------|
 | [01-essentials.md](01-essentials.md) | Leader key, core options, windows / splits / tabs, sessions, tmux navigation |
 | [02-files-and-search.md](02-files-and-search.md) | File explorer (nvim-tree), fuzzy finder (Telescope), regexp grep with include/exclude, buffer/tab line |
-| [03-editing.md](03-editing.md) | Commenting, surround, substitute, autopairs, Treesitter selection, autocompletion, TODO comments |
+| [03-editing.md](03-editing.md) | Commenting, surround, substitute, autopairs, Treesitter selection, autocompletion, TODO comments, markdown viewing |
 | [04-lsp-and-diagnostics.md](04-lsp-and-diagnostics.md) | LSP (go-to, rename, hover, code actions), diagnostics, formatting, linting, Trouble, Mason |
 | [05-git.md](05-git.md) | Gitsigns (hunks, blame), Diffview (review changes), LazyGit |
 | [06-debugging.md](06-debugging.md) | DAP debugger — breakpoints, stepping, the debug UI |

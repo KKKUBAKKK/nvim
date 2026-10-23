@@ -79,6 +79,11 @@ function M.apply(name, background)
   require("lazy").load({ plugins = { theme.plugin } })
 
   vim.o.background = background
+  -- Some colorschemes (e.g. gruvbox) only run `hi clear` when another scheme
+  -- was already active, so at startup plugin highlights derived from the
+  -- built-in default scheme would survive (bufferline sets its groups with
+  -- `default = true`, so it can't overwrite them). Clear them first.
+  vim.cmd.highlight("clear")
   vim.cmd.colorscheme(background == "light" and theme.light or theme.dark)
 
   M.state = { name = theme.name, background = background }
