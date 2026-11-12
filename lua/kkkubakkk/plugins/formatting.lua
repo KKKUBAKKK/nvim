@@ -7,10 +7,11 @@ return {
 		conform.setup({
 			-- Define formatters for each filetype
 			formatters_by_ft = {
-				-- C/C++/CUDA (uses .clang-format in your project if present)
+				-- C/C++/CUDA/OpenCL (uses .clang-format in your project if present)
 				c = { "clang_format" },
 				cpp = { "clang_format" },
 				cuda = { "clang_format" },
+				opencl = { "clang_format" },
 				-- Lua (this config)
 				lua = { "stylua" },
 				-- C#

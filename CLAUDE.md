@@ -28,11 +28,13 @@ Plugins are lazy-loaded via `event` (e.g. `BufReadPre`/`BufNewFile`), `ft` (file
 The C/C++/CUDA toolchain is split across four cooperating files:
 
 - `plugins/lsp/mason.lua` — installs LSP servers (`mason-lspconfig` `ensure_installed`: `lua_ls`, `clangd`, `cmake`) and CLI tools (`mason-tool-installer` `ensure_installed`: `clang-format`, `stylua`). Most entries are commented-out templates for other languages — uncomment to enable.
-- `plugins/lsp/lspconfig.lua` — configures servers with the **Neovim 0.11 native API**: `vim.lsp.config(server, {...})`. mason-lspconfig v2 auto-enables installed servers, so there are **no `lspconfig[server].setup()` or `setup_handlers` calls** (removed in v2 — do not reintroduce them). LSP keymaps (`gd`, `gR`, `gi`, `K`, `<leader>ca`, `<leader>rn`, etc.) are set in a `LspAttach` autocmd. clangd is launched with CUDA-aware flags including `--query-driver` for nvcc.
-- `plugins/formatting.lua` — conform.nvim, format-on-save (synchronous). `clang_format` for c/cpp/cuda, `stylua` for lua. Manual format: `<leader>mp`.
+- `plugins/lsp/lspconfig.lua` — configures servers with the **Neovim 0.11 native API**: `vim.lsp.config(server, {...})`. mason-lspconfig v2 auto-enables installed servers, so there are **no `lspconfig[server].setup()` or `setup_handlers` calls** (removed in v2 — do not reintroduce them). LSP keymaps (`gd`, `gR`, `gi`, `K`, `<leader>ca`, `<leader>rn`, etc.) are set in a `LspAttach` autocmd. clangd is launched with CUDA-aware flags including `--query-driver` for nvcc, and its `filetypes` list is overridden to add `opencl`.
+- `plugins/formatting.lua` — conform.nvim, format-on-save (synchronous). `clang_format` for c/cpp/cuda/opencl, `stylua` for lua. Manual format: `<leader>mp`.
 - `plugins/linting.lua` — nvim-lint, lints on `BufEnter`/`BufWritePost`/`InsertLeave`. All linters currently commented out. Manual: `<leader>l`.
 
 Capabilities from `cmp-nvim-lsp` are broadcast to all servers via `vim.lsp.config("*", { capabilities })`.
+
+OpenCL (`*.cl`) is forced to filetype `opencl` in `core/filetypes.lua` (Neovim's default guesses Lisp). There is no OpenCL tree-sitter parser, so `plugins/treesitter.lua` registers the `c` parser for `opencl` and a `FileType opencl` autocmd also turns on Vim regex syntax, which loads `after/syntax/opencl.vim` (qualifiers, vector types, builtins). `lspconfig.lua` clears `@lsp.type.comment.opencl` (again on every `ColorScheme`) so clangd's inactive-`#ifdef` greying is off for OpenCL only.
 
 ### Build / debug (C/C++/CUDA)
 

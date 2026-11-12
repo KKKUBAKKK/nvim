@@ -107,6 +107,9 @@ return {
                 -- paths to match your toolchain if needed.
                 "--query-driver=/usr/bin/nvcc,/usr/local/cuda*/bin/nvcc,/usr/bin/g++,/usr/bin/clang++",
             },
+            -- Default clangd filetypes + OpenCL (clangd parses *.cl as OpenCL C
+            -- natively, which also gives semantic-token highlighting there).
+            filetypes = { "c", "c.doxygen", "cpp", "cpp.doxygen", "objc", "objcpp", "cuda", "opencl" },
             init_options = {
                 usePlaceholders = true,
                 completeUnimported = true,
@@ -116,6 +119,21 @@ return {
             capabilities = vim.tbl_deep_extend("force", capabilities, {
                 offsetEncoding = { "utf-16" },
             }),
+        })
+
+        -- clangd paints preprocessor branches it considers inactive with a
+        -- "comment" semantic token (greyed out). For OpenCL that is misleading:
+        -- kernel macros come from clBuildProgram -D options at runtime, which
+        -- clangd never sees. Clear the group for opencl only (C/C++ keep it, as
+        -- compile_commands.json gives clangd the real flags). Re-applied on
+        -- ColorScheme because :colorscheme resets highlight groups.
+        local function show_inactive_opencl_code()
+            vim.api.nvim_set_hl(0, "@lsp.type.comment.opencl", {})
+        end
+        show_inactive_opencl_code()
+        vim.api.nvim_create_autocmd("ColorScheme", {
+            group = vim.api.nvim_create_augroup("OpenCLInactiveRegions", { clear = true }),
+            callback = show_inactive_opencl_code,
         })
 
         -- lua_ls: recognise the `vim` global when editing this config.

@@ -57,3 +57,19 @@ All the usual LSP keymaps apply in C/C++ files — `gd` (definition), `gR` (refe
 ## Treesitter
 
 Parsers for `c`, `cpp`, `cuda`, `cmake`, and `make` are pre-installed, giving accurate highlighting and `<C-space>` incremental selection (see [03-editing.md](03-editing.md)).
+
+## OpenCL C (`.cl`)
+
+Neovim on its own types a `.cl` file as Lisp unless one of its first 4 lines has a `/*` comment. This config always treats `*.cl` as `opencl` (`core/filetypes.lua`). OpenCL files get:
+
+- **Highlighting**: the tree-sitter `c` parser, plus a Vim regex overlay (`after/syntax/opencl.vim`) for what C doesn't know: `__kernel`/`__global`/`__local`/... qualifiers, vector types (`float4`, `uint8`, ...), image/sampler types, builtins (`get_global_id`, `barrier`, `vload4`, `convert_*`, atomics, sub-groups) and `CLK_*` constants.
+- **clangd**: it parses `.cl` as OpenCL C, so you get diagnostics, completion, go-to-definition and semantic highlighting (types and builtins get colored correctly).
+- **clang-format** on save, the same as C/C++.
+- **`#ifdef` branches stay in color.** clangd normally greys out code under a macro it thinks is undefined. For `.cl` files that guess is useless, because the `-D` options come from `clBuildProgram` at runtime. So the greying is turned off for OpenCL only (C/C++ keep it). If you also want clangd to *analyze* a branch, i.e. diagnostics and go-to-definition inside it, tell it the macro: add a `.clangd` file in the project root with
+
+  ```yaml
+  If:
+    PathMatch: .*\.cl
+  CompileFlags:
+    Add: [-DUSE_FP64, -cl-std=CL3.0]
+  ```

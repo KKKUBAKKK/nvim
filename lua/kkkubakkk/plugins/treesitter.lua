@@ -54,5 +54,26 @@ return {
         },
       },
     })
+
+    -- OpenCL C is a C dialect: reuse the C parser for highlighting,
+    -- indentation and incremental selection in *.cl buffers.
+    vim.treesitter.language.register("c", "opencl")
+
+    -- The C parser leaves OpenCL qualifiers (__kernel, __global, ...) as ERROR
+    -- nodes and knows nothing of OpenCL builtins, so also run the Vim regex
+    -- syntax (after/syntax/opencl.vim) underneath tree-sitter for opencl.
+    -- (additional_vim_regex_highlighting can't do this: it matches the parser
+    -- name "c", which would turn regex syntax on for every C file.)
+    vim.api.nvim_create_autocmd("FileType", {
+      group = vim.api.nvim_create_augroup("OpenCLRegexSyntax", { clear = true }),
+      pattern = "opencl",
+      callback = function(args)
+        vim.schedule(function()
+          if vim.api.nvim_buf_is_valid(args.buf) then
+            vim.bo[args.buf].syntax = "opencl"
+          end
+        end)
+      end,
+    })
   end,
 }
